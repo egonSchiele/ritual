@@ -1,0 +1,2 @@
+- add location and created_at cols to table
+- searching through data
