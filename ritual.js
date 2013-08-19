@@ -7,5 +7,11 @@ function postToUrl(url)
   return xmlHttp.responseText;
 }
 
-var url = "http://www.adit.io:4567/add?url=" + encodeURIComponent(document.URL) + "&contents=" + document.getElementsByTagName("html")[0].innerHTML;
-postToUrl(url);
+navigator.geolocation.getCurrentPosition(function(position)) {
+  var url = "http://www.adit.io:4567/add" +
+    "?url=" + encodeURIComponent(document.URL) +
+    "&contents=" + document.getElementsByTagName("html")[0].innerHTML +
+    "&latitude=" + position.coords.latitude +
+    "&longitude=" + position.coords.longitude;
+  postToUrl(url);
+}
