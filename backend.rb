@@ -1,18 +1,9 @@
 require 'rubygems'
 require 'sinatra'
-require 'open-uri'
 require 'mysql2'
 require 'yaml'
 
 CONFIG = YAML.load(File.read("connection.yml")).merge({'host' => 'localhost', 'port' => 3306})
-
-def extract(url)
-  begin
-    open(url).read
-  rescue
-    ""
-  end
-end
 
 def add_to_database(url, contents)
   con              = Mysql2::Client.new(CONFIG)
@@ -23,9 +14,9 @@ def add_to_database(url, contents)
   con.close
 end
 
-get '/add' do
+post '/add' do
   url      = params[:url]
-  contents = extract url
+  contents = params[:contents]
   add_to_database(url, contents)
   "#{url} added to db!"
 end
