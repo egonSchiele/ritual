@@ -10,10 +10,10 @@ function postToUrl(url, data) {
 }
 
 chrome.runtime.sendMessage ( {command: "getGeolocation"}, function (position) {
-    var url = "http://www.adit.io:4567/add";
+    var url = "http://localhost:4567/add";
     var data = "url="        + encodeURIComponent(document.URL) +
-               "&contents="  + document.getElementsByTagName("html")[0].innerHTML +
-               "&latitude="  + position.coords.latitude +
-               "&longitude=" + position.coords.longitude;
+               "&contents="  + encodeURIComponent(document.getElementsByTagName("html")[0].innerHTML) +
+               "&latitude="  + encodeURIComponent(position.coords.latitude) +
+               "&longitude=" + encodeURIComponent(position.coords.longitude);
     postToUrl(url, data);
   });
