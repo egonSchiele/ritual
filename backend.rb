@@ -22,8 +22,8 @@ end
 post '/add' do
   url       = params[:url]
   contents  = params[:contents]
-  latitude  = params[:latitude]
-  longitude = params[:longitude]
+  latitude  = params[:latitude].to_f
+  longitude = params[:longitude].to_f
   add_to_database(url, contents, latitude, longitude)
   "#{url} added to db!"
 end

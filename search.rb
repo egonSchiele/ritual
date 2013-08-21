@@ -23,6 +23,9 @@ and contents like '%#{escaped_contents}%'
   results = []
   con.query(query).each do |row|
     dist = distance([row['latitude'], row['longitude']], coords)
+    # puts "dist: #{dist.inspect}"
+    # TODO: would be nice to be able to specify how wide a radius to search in
+    # (same location, same city, same state, etc)
     if dist < 0.025
       p row
     end
@@ -45,5 +48,4 @@ locations = {
 }
 
 location = locations[location] || location
-
 search url, contents, location
